@@ -25,7 +25,7 @@ object FirebaseHelper {
     lateinit var invalidateListener: InvalidateListener
 
 
-    fun initFBReference(ref: String,activity: MainActivity, listener: InvalidateListener) {
+    fun initFBReference(ref: String, activity: MainActivity, listener: InvalidateListener) {
         mFirebaseDatabase = FirebaseDatabase.getInstance()
         mAuth = FirebaseAuth.getInstance()
         this.activity = activity
@@ -35,10 +35,6 @@ object FirebaseHelper {
         mAuthListener = FirebaseAuth.AuthStateListener {
             if (mAuth.currentUser == null) {
                 signIn()
-            } else {
-                val userId = mAuth.uid
-
-
             }
             Toast.makeText(activity, "Welcome!", Toast.LENGTH_SHORT).show()
         }
@@ -71,32 +67,6 @@ object FirebaseHelper {
                 attachListener()
             }
         detachListener()
-    }
-
-    private fun checkAdmin(uuid: String) {
-        isAdmin = false
-        val reference = mFirebaseDatabase.reference.child("administrators")
-            .child(uuid)
-
-        val listener = object : ChildEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-            }
-
-            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-            }
-
-            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-            }
-
-            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                isAdmin = true
-                invalidateListener.invalidateOptions()
-            }
-
-            override fun onChildRemoved(p0: DataSnapshot) {
-            }
-        }
-        reference.addChildEventListener(listener)
     }
 
     fun attachListener() {

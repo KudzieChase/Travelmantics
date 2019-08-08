@@ -17,7 +17,7 @@ import com.kudziechase.travelmantics.utils.FirebaseHelper
 
 class DealActivity : AppCompatActivity() {
 
-    val mDatabaseReference = FirebaseHelper.mDatabaseRef
+    private val mDatabaseReference = FirebaseHelper.mDatabaseRef
 
     private val RESULT_PICTURE = 20
     private var deal: TravelDeal? = null
@@ -140,12 +140,6 @@ class DealActivity : AppCompatActivity() {
         txtDescription.setText("")
         txtTitle.setText("")
         txtTitle.requestFocus()
-    }
-
-    private fun enableEditTexts(isEnabled: Boolean) {
-        txtTitle.isEnabled = isEnabled
-        txtDescription.isEnabled = isEnabled
-        txtPrice.isEnabled = isEnabled
     }
 
     private fun showImage(imageUrl: String) {
